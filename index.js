@@ -26,6 +26,14 @@ client.connect(err => {
         res.send(documents)
     })
 })
+
+app.get('/food',(req,res)=>{
+    console.log(req.query.search);
+    collection.find({name:{$regex:req.query.search}}).toArray((err,documents)=>{
+        res.send(documents)
+    })
+})
+
 app.get('/foods/:id',(req,res)=>{
     collection.find({_id:ObjectID(req.params.id)}).toArray((err,documents)=>{
         res.send(documents)
